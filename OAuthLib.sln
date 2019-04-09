@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuthLib", "OAuthLib\OAuthL
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OAuthTestApp", "OAuthTestApp\OAuthTestApp.vcxproj", "{6A208BCC-283B-4EF8-BAD8-D85B56F33524}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OAuthClient", "OAuthClient\OAuthClient.vcxproj", "{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,7 @@ Global
 		{7F88D954-B270-4DF9-A608-C0AA8A967531}.Release|x86.ActiveCfg = Release|Any CPU
 		{7F88D954-B270-4DF9-A608-C0AA8A967531}.Release|x86.Build.0 = Release|Any CPU
 		{6A208BCC-283B-4EF8-BAD8-D85B56F33524}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{6A208BCC-283B-4EF8-BAD8-D85B56F33524}.Debug|Any CPU.Build.0 = Debug|Win32
 		{6A208BCC-283B-4EF8-BAD8-D85B56F33524}.Debug|x64.ActiveCfg = Debug|x64
 		{6A208BCC-283B-4EF8-BAD8-D85B56F33524}.Debug|x64.Build.0 = Debug|x64
 		{6A208BCC-283B-4EF8-BAD8-D85B56F33524}.Debug|x86.ActiveCfg = Debug|Win32
@@ -39,6 +42,17 @@ Global
 		{6A208BCC-283B-4EF8-BAD8-D85B56F33524}.Release|x64.Build.0 = Release|x64
 		{6A208BCC-283B-4EF8-BAD8-D85B56F33524}.Release|x86.ActiveCfg = Release|Win32
 		{6A208BCC-283B-4EF8-BAD8-D85B56F33524}.Release|x86.Build.0 = Release|Win32
+		{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}.Debug|Any CPU.Build.0 = Debug|Win32
+		{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}.Debug|x64.ActiveCfg = Debug|x64
+		{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}.Debug|x64.Build.0 = Debug|x64
+		{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}.Debug|x86.ActiveCfg = Debug|Win32
+		{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}.Debug|x86.Build.0 = Debug|Win32
+		{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}.Release|Any CPU.ActiveCfg = Release|Win32
+		{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}.Release|x64.ActiveCfg = Release|x64
+		{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}.Release|x64.Build.0 = Release|x64
+		{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}.Release|x86.ActiveCfg = Release|Win32
+		{AE8B7BD2-90F3-42AD-9E15-2B51182A179B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

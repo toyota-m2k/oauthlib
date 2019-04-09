@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace OAuthLib
 {
     [Guid("5451A7AC-2576-4ADC-9E53-ECF29D3BB188")]
-    //[InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    interface IOAuthDriver
+    [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
+    public interface IOAuthDriver
     {
         [DispId(1)]
         void Auth();

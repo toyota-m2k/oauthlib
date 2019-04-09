@@ -9,8 +9,9 @@ namespace OAuthLib
 {
     [Guid("93CDD046-E07B-4274-BA76-5F9B467F6D13")]
     [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
-    public interface IOAuthResultEvent
+    public interface IOAuthCompletedEvent
     {
-        void Result(bool succeeded);
+        [DispId(1)]
+        void OnCompleted(bool succeeded);
     }
 }

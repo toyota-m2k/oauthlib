@@ -6,6 +6,7 @@
 #include "OAuthTestApp.h"
 #include "OAuthTestAppDlg.h"
 #include "afxdialogex.h"
+#include "../OAuthClient/OAuthClientApi.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -30,6 +31,8 @@ public:
 // 実装
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedButton1();
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
@@ -64,6 +67,7 @@ BEGIN_MESSAGE_MAP(COAuthTestAppDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON1, &COAuthTestAppDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -152,3 +156,22 @@ HCURSOR COAuthTestAppDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+// COAuthTestApp の初期化
+void OAuthCallback(HANDLE_OAUTH hAuth, void* clientData, bool succeeded, LPCWSTR accessToken, LPCWSTR refreshToken) {
+	if (succeeded) {
+		TRACE(L"accessToken=%s, refreshToken=%s\n", accessToken, refreshToken);
+	}
+	else {
+		TRACE(L"Error\n");
+	}
+	::OAUTHClose(hAuth);
+}
+
+void COAuthTestAppDlg::OnBnClickedButton1()
+{
+	HANDLE_OAUTH oauth = ::OAUTHOpen(OAuthCallback, this);
+	if (oauth) {
+		::OAUTHInitialAuth(oauth);
+	}
+}

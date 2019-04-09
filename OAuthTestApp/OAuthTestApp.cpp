@@ -5,7 +5,12 @@
 #include "stdafx.h"
 #include "OAuthTestApp.h"
 #include "OAuthTestAppDlg.h"
-#include "Debug\oauthlib.tlh"
+//#ifdef _DEBUG
+//#import "..\OAuthLib\bin\Debug\OAuthLib.tlb" no_namespace named_guids
+//#else
+//#import "..\OAuthLib\bin\Release\OAuthLib.tlb" no_namespace named_guids
+//#endif
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -35,8 +40,6 @@ COAuthTestApp::COAuthTestApp()
 
 COAuthTestApp theApp;
 
-
-// COAuthTestApp の初期化
 
 BOOL COAuthTestApp::InitInstance()
 {
@@ -69,7 +72,7 @@ BOOL COAuthTestApp::InitInstance()
 	// 設定が格納されているレジストリ キーを変更します。
 	// TODO: 会社名または組織名などの適切な文字列に
 	// この文字列を変更してください。
-	SetRegistryKey(_T("アプリケーション ウィザードで生成されたローカル アプリケーション"));
+	////SetRegistryKey(_T("アプリケーション ウィザードで生成されたローカル アプリケーション"));
 
 	COAuthTestAppDlg dlg;
 	m_pMainWnd = &dlg;
@@ -78,6 +81,51 @@ BOOL COAuthTestApp::InitInstance()
 	{
 		// TODO: ダイアログが <OK> で消された時のコードを
 		//  記述してください。
+#if 0
+		IUnknown* oauthLib = NULL;
+		IOAuthDriver* dsp = NULL;
+		IConnectionPointContainer* cpc = NULL;
+		IConnectionPoint* cp = NULL;
+		HRESULT hr;
+		do {
+			hr = ::CoCreateInstance(CLSID_OAuthDriver, NULL, CLSCTX_INPROC_SERVER, IID_IUnknown, (void**)&oauthLib);
+			if (FAILED(hr)) {
+				break;
+			}
+			hr = oauthLib->QueryInterface(DIID_IOAuthDriver, (void**)&dsp);
+			if (FAILED(hr)) {
+				break;
+			}
+
+			_bstr_t token = dsp->GetAccessToken();
+			TRACE(LPCWSTR(token));
+
+			hr = dsp->QueryInterface(IID_IConnectionPointContainer, (void**)&cpc);
+			if (FAILED(hr)) {
+				break;
+			}
+
+			hr = cpc->FindConnectionPoint(DIID_IOAuthCompletedEvent, &cp);
+			if (FAILED(hr)) {
+				break;
+			}
+
+		} while (0);
+
+		if (dsp) {
+			dsp->Release();
+		}
+		if (cpc) {
+			cpc->Release();
+		}
+		if (cp) {
+			cp->Release();
+		}
+		if (oauthLib) {
+			oauthLib->Release();
+		}
+#endif
+
 	}
 	else if (nResponse == IDCANCEL)
 	{
@@ -100,18 +148,6 @@ BOOL COAuthTestApp::InitInstance()
 	ControlBarCleanUp();
 #endif
 
-	HRESULT hr;
-	IUnknown* oauthLib = NULL;
-	hr = ::CoCreateInstance(LIBID_OAuthLib, NULL, CLSCTX_INPROC_SERVER, IID_IUnknown, (void**)&oauthLib);
-	if (FAILED(hr)) {
-		return false;
-	}
-	_OAuthDriver* dsp;
-	oauthLib->QueryInterface(CLSID_OAuthDriver, (void**)&dsp);
-	_bstr_t token = dsp->GetAccessToken();
-	TRACE(LPCWSTR(token));
-
-
 	// ダイアログは閉じられました。アプリケーションのメッセージ ポンプを開始しないで
 	//  アプリケーションを終了するために FALSE を返してください。
 	return FALSE;
@@ -119,7 +155,7 @@ BOOL COAuthTestApp::InitInstance()
 
 int COAuthTestApp::ExitInstance() {
 	::CoUninitialize();
-	return CWinApp::ExitInstance()
+	return CWinApp::ExitInstance();
 }
 
 

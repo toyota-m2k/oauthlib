@@ -5,5 +5,5 @@
 
 #include "stdafx.h"
 
-//#import "..\OAuthLib\bin\Debug\OAuthLib.tlb" no_namespace named_guids
+// #import "..\OAuthLib\bin\Debug\OAuthLib.tlb" no_namespace named_guids
 
