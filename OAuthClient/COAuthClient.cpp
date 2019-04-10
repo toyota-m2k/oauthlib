@@ -79,11 +79,11 @@ void COAuthClient::OAuthCompleted(BOOL succeeded) {
 	}
 }
 
-BOOL COAuthClient::Auth() {
+BOOL COAuthClient::Auth(LPCWSTR mailAddress) {
 	if (HasError()) {
 		return FALSE;
 	}
-	HRESULT hr = mAuthDriver->Auth();
+	HRESULT hr = mAuthDriver->Auth(_bstr_t(mailAddress));
 	return SUCCEEDED(hr);
 }
 

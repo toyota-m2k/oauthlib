@@ -172,6 +172,6 @@ void COAuthTestAppDlg::OnBnClickedButton1()
 {
 	HANDLE_OAUTH oauth = ::OAUTHOpen(OAuthCallback, this);
 	if (oauth) {
-		::OAUTHInitialAuth(oauth);
+		::OAUTHAuthenticate(oauth, L"gentamicinsulfate@gmail.com");
 	}
 }

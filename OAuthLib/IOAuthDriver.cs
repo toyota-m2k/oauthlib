@@ -12,7 +12,7 @@ namespace OAuthLib
     public interface IOAuthDriver
     {
         [DispId(1)]
-        void Auth();
+        void Auth(string mailAddress);
 
         [DispId(2)]
         void Update(string accessToken, string refreshToken);

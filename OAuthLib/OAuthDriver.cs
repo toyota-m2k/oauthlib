@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -29,20 +30,25 @@ namespace OAuthLib
 
         public event OnCompletedEventHandler OnCompleted;
 
-        public async void Auth()
+        public async void Auth(string mailAddress)
         {
             var scheduler = TaskScheduler.Current;
-            var core = new OAuthCore();
-            await core.Auth().ContinueWith(task =>
+            try
             {
-                bool result = task.Result;
-                if(result)
+                await OAuthCore2.Auth(mailAddress).ContinueWith(task =>
                 {
-                    AccessToken = core.AccessToken;
-                    RefreshToken = core.RefreshToken;
-                }
-                OnCompleted?.Invoke(result);
-            }, scheduler);
+                    (AccessToken, RefreshToken) = task.Result;
+                    OnCompleted?.Invoke(true);
+                }, scheduler);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+                new Task(() =>
+                {
+                    OnCompleted?.Invoke(false);
+                }).RunSynchronously(scheduler);
+            }
         }
 
         public void Update(string accessToken, string refreshToken)

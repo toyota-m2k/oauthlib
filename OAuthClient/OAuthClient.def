@@ -6,5 +6,5 @@ EXPORTS
     ; 明示的なエクスポートはここへ記述できます
 	OAUTHOpen								@1
 	OAUTHClose								@2
-	OAUTHInitialAuth						@3
-	OAUTHUpdateAuth							@4
+	OAUTHAuthenticate						@3
+	;OAUTHUpdateAuth							@4

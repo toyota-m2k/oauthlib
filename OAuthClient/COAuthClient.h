@@ -27,7 +27,7 @@ public:
 		return FAILED(mResult);
 	}
 
-	BOOL Auth();
+	BOOL Auth(LPCWSTR mailAddress);
 	BOOL Update(LPCWSTR accessToken, LPCWSTR refreshToken);
 };
 

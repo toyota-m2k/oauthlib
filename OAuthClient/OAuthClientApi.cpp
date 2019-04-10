@@ -17,10 +17,10 @@ void APIENTRY OAUTHClose(HANDLE_OAUTH client) {
 	}
 }
 
-BOOL APIENTRY OAUTHInitialAuth(HANDLE_OAUTH client) {
-	return client->Auth();
+BOOL APIENTRY OAUTHAuthenticate(HANDLE_OAUTH client, LPCWSTR mailAddress) {
+	return client->Auth(mailAddress);
 }
 
-BOOL APIENTRY OAUTHUpdateAuth(HANDLE_OAUTH client, LPCWSTR accessToken, LPCWSTR refreshToken) {
-	return client->Update(accessToken, refreshToken);
-}
+//BOOL APIENTRY OAUTHUpdateAuth(HANDLE_OAUTH client, LPCWSTR accessToken, LPCWSTR refreshToken) {
+//	return client->Update(accessToken, refreshToken);
+//}

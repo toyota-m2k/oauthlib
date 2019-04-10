@@ -8,6 +8,6 @@ typedef void(*OAUTHCallback)(HANDLE_OAUTH hAuth, void* clientData, bool succeede
 extern "C" {
 	HANDLE_OAUTH APIENTRY OAUTHOpen(OAUTHCallback callback, void* clientData);
 	void APIENTRY OAUTHClose(HANDLE_OAUTH hAuth);
-	BOOL APIENTRY OAUTHInitialAuth(HANDLE_OAUTH hAuth);
-	BOOL APIENTRY OAUTHUpdateAuth(HANDLE_OAUTH hAuth, LPCWSTR accessToken, LPCWSTR refreshToken);
+	BOOL APIENTRY OAUTHAuthenticate(HANDLE_OAUTH hAuth, LPCWSTR mailAddress);
+	//BOOL APIENTRY OAUTHUpdateAuth(HANDLE_OAUTH hAuth, LPCWSTR accessToken, LPCWSTR refreshToken);
 }
