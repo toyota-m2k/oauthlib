@@ -160,7 +160,7 @@ HCURSOR COAuthTestAppDlg::OnQueryDragIcon()
 // COAuthTestApp の初期化
 void OAuthCallback(HANDLE_OAUTH hAuth, void* clientData, bool succeeded, LPCWSTR accessToken, LPCWSTR refreshToken) {
 	if (succeeded) {
-		TRACE(L"accessToken=%s, refreshToken=%s\n", accessToken, refreshToken);
+		TRACE(L"accessToken=%s\nrefreshToken=%s\n", accessToken, refreshToken);
 	}
 	else {
 		TRACE(L"Error\n");

@@ -15,7 +15,7 @@ namespace OAuthLib
         void Auth(string mailAddress);
 
         [DispId(2)]
-        void Update(string accessToken, string refreshToken);
+        void Cancel();
 
         [DispId(3)]
         string GetAccessToken();

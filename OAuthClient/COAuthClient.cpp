@@ -42,18 +42,6 @@ COAuthClient::~COAuthClient()
 }
 
 void COAuthClient::Dispose() {
-	if (mOAuthLib) {
-		mOAuthLib->Release();
-		mOAuthLib = NULL;
-	}
-	if (mAuthDriver) {
-		mAuthDriver->Release();
-		mAuthDriver = NULL;
-	}
-	if (mCPointContainer) {
-		mCPointContainer->Release();
-		mCPointContainer = NULL;
-	}
 	if (mCPoint) {
 		if (mCookie != (DWORD)-1) {
 			mCPoint->Unadvise(mCookie);
@@ -64,6 +52,18 @@ void COAuthClient::Dispose() {
 	if (mEventSink) {
 		mEventSink->Release();
 		mEventSink = NULL;
+	}
+	if (mCPointContainer) {
+		mCPointContainer->Release();
+		mCPointContainer = NULL;
+	}
+	if (mAuthDriver) {
+		mAuthDriver->Release();
+		mAuthDriver = NULL;
+	}
+	if (mOAuthLib) {
+		mOAuthLib->Release();
+		mOAuthLib = NULL;
 	}
 }
 
@@ -87,10 +87,18 @@ BOOL COAuthClient::Auth(LPCWSTR mailAddress) {
 	return SUCCEEDED(hr);
 }
 
-BOOL COAuthClient::Update(LPCWSTR accessToken, LPCWSTR refreshToken) {
+BOOL COAuthClient::Cancel() {
 	if (HasError()) {
 		return FALSE;
 	}
-	HRESULT hr = mAuthDriver->Update(accessToken, refreshToken);
+	HRESULT hr = mAuthDriver->Cancel();
 	return SUCCEEDED(hr);
 }
+
+//BOOL COAuthClient::Update(LPCWSTR accessToken, LPCWSTR refreshToken) {
+//	if (HasError()) {
+//		return FALSE;
+//	}
+//	HRESULT hr = mAuthDriver->Update(accessToken, refreshToken);
+//	return SUCCEEDED(hr);
+//}

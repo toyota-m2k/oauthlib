@@ -15,7 +15,7 @@ namespace OAuthLib
         private const string clientId = "57725866151-cdsu00rs2p36g4k8uv03ksqa4qnbnbdb.apps.googleusercontent.com";
         private const string clientSecret = "QpGl45F3qf7eXpe2Q35jsCbc";
 
-        public static async Task<(string accessToken, string refreshToken)> Auth(string mailAddress)
+        public static async Task<(string accessToken, string refreshToken)> Auth(string mailAddress, CancellationToken? token)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace OAuthLib
                     "https://mail.google.com/"
                     },
                     mailAddress,
-                    CancellationToken.None,
+                    token ?? CancellationToken.None,
                     new FileDataStore("mchMail")
                     );
                 return (userCredential.Token.AccessToken, userCredential.Token.RefreshToken);

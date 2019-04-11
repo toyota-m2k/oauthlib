@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OAuthLib
@@ -19,6 +20,9 @@ namespace OAuthLib
     {
         private string AccessToken { get; set; }
         private string RefreshToken { get; set; }
+        private CancellationTokenSource mCancellationTokenSource = new CancellationTokenSource();
+        private bool mCompleted = false;
+        private Exception mError = null;
 
         public OAuthDriver()
         {
@@ -35,15 +39,17 @@ namespace OAuthLib
             var scheduler = TaskScheduler.Current;
             try
             {
-                await OAuthCore2.Auth(mailAddress).ContinueWith(task =>
+                await OAuthCore2.Auth(mailAddress, mCancellationTokenSource.Token).ContinueWith(task =>
                 {
                     (AccessToken, RefreshToken) = task.Result;
+                    mCompleted = true;
                     OnCompleted?.Invoke(true);
                 }, scheduler);
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.ToString());
+                mError = e;
                 new Task(() =>
                 {
                     OnCompleted?.Invoke(false);
@@ -51,24 +57,30 @@ namespace OAuthLib
             }
         }
 
-        public void Update(string accessToken, string refreshToken)
+        public void Cancel()
         {
-            OnCompleted?.Invoke(false);
+            mError = new OperationCanceledException("cancelled by caller.");
+            mCancellationTokenSource.Cancel();
         }
+
+        //public void Update(string accessToken, string refreshToken)
+        //{
+        //    OnCompleted?.Invoke(false);
+        //}
 
         public string GetAccessToken()
         {
-            return AccessToken;
+            return mCompleted ? AccessToken : null;
         }
 
         public string GetRefreshToken()
         {
-            return RefreshToken;
+            return mCompleted ? RefreshToken : null;
         }
 
         public string GetErrorMessage()
         {
-            return "No Error.";
+            return mError?.Message ?? "no error.";
         }
     }
 }

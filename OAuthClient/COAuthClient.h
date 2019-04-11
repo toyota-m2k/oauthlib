@@ -28,6 +28,7 @@ public:
 	}
 
 	BOOL Auth(LPCWSTR mailAddress);
-	BOOL Update(LPCWSTR accessToken, LPCWSTR refreshToken);
+	BOOL Cancel();
+	//BOOL Update(LPCWSTR accessToken, LPCWSTR refreshToken);
 };
 
