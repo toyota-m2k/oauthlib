@@ -12,8 +12,8 @@ namespace OAuthLib
 {
     public static class OAuthCore2
     {
-        private const string clientId = "57725866151-cdsu00rs2p36g4k8uv03ksqa4qnbnbdb.apps.googleusercontent.com";
-        private const string clientSecret = "QpGl45F3qf7eXpe2Q35jsCbc";
+        private const string clientId = Secrets.clientId;
+        private const string clientSecret = Secrets.clientSecret;
 
         public static async Task<(string accessToken, string refreshToken)> Auth(string mailAddress, CancellationToken? token)
         {

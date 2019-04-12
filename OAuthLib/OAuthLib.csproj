@@ -69,6 +69,7 @@
     <Compile Include="IOAuthCompletedEvent.cs" />
     <Compile Include="IOAuthDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Secrets.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
