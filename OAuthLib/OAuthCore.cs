@@ -13,8 +13,8 @@ namespace OAuthLib
 {
     public class OAuthCore
     {
-        //private const string clientID = "581786658708-elflankerquo1a6vsckabbhn25hclla0.apps.googleusercontent.com";
-        //private const string clientSecret = "3f6NggMbPtrmIBpgx-MK2xXK";
+        //private const string clientID = "XXXX";
+        //private const string clientSecret = "XXXX";
         //private const string authorizationEndpoint = "https://accounts.google.com/o/oauth2/v2/auth";
         //private const string tokenEndpoint = "https://www.googleapis.com/oauth2/v4/token";
         //private const string userInfoEndpoint = "https://www.googleapis.com/oauth2/v3/userinfo";
