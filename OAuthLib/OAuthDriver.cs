@@ -18,6 +18,8 @@ namespace OAuthLib
     [ComSourceInterfaces(typeof(IOAuthCompletedEvent))]
     public class OAuthDriver : IOAuthDriver
     {
+        static TaskSerializer<(string accessToken, string refreshToken)> Serializer { get; } = new TaskSerializer<(string accessToken, string refreshToken)>();
+
         private string AccessToken { get; set; }
         private string RefreshToken { get; set; }
         private CancellationTokenSource mCancellationTokenSource = new CancellationTokenSource();
@@ -39,7 +41,10 @@ namespace OAuthLib
             var scheduler = TaskScheduler.Current;
             try
             {
-                await OAuthCore2.Auth(mailAddress, mCancellationTokenSource.Token).ContinueWith(task =>
+                await Serializer.Execute(mailAddress, () =>
+                {
+                    return OAuthCore2.Auth(mailAddress, mCancellationTokenSource.Token);
+                }).ContinueWith(task =>
                 {
                     (AccessToken, RefreshToken) = task.Result;
                     mCompleted = true;
